@@ -4,7 +4,7 @@ bookdown::bs4_book:
     primary: "#096B72"
   split_by: chapter
   config:
-    toc:
+    toc: 
       collapse: section
       before: |
         <li><a href="./">Índice</a></li>
