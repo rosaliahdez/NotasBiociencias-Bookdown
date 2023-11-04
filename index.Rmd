@@ -6,11 +6,9 @@ site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
 # url: your book url like https://bookdown.org/yihui/bookdown
-# cover-image: path to the social sharing image like images/cover.jpg
-#description: |
-#  This is a minimal example of using the bookdown package to write a book.
-#  The HTML output format for this example is bookdown::gitbook,
-#  set in the _output.yml file.
+cover-image: portada.png
+description: |
+  Estas notas fueron elaboradas como recurso de apoyo en el marco del *Taller de Aplicación de técnicas estadísticas*, impartido a estudiantes del Posgrado en Biociencias de la Universidad de Sonora durante el semestre 2022-2, y fueron adaptadas para utilizarse en cursos de Estadística y Bioestadística durante los semestres 2023-1 y 2023-2 con estudiantes de nivel licenicatura.
 link-citations: yes
 github-repo: rosaliahdez/book-demo
 ---
