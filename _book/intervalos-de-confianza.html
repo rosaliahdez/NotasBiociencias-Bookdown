@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 6 Intervalos de confianza | Introducción al software R</title>
+<meta name="author" content="Figueroa Preciado Gudelia, Hernández Amador Rosalía Gpe., Montoya Laos José">
+<meta name="generator" content="bookdown 0.36 with bs4_book()">
+<meta property="og:title" content="Capítulo 6 Intervalos de confianza | Introducción al software R">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 6 Intervalos de confianza | Introducción al software R">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+<meta name="description" content="Un intervalo de confianza es un rango de valores que se utiliza en estadística para estimar un parámetro desconocido de una población en base a una muestra de datos. Comunmente el parámetro...">
+<meta property="og:description" content="Un intervalo de confianza es un rango de valores que se utiliza en estadística para estimar un parámetro desconocido de una población en base a una muestra de datos. Comunmente el parámetro...">
+<meta name="twitter:description" content="Un intervalo de confianza es un rango de valores que se utiliza en estadística para estimar un parámetro desconocido de una población en base a una muestra de datos. Comunmente el parámetro...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Introducción al software R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Prefacio</a></li>
+<li><a class="" href="el-software.html"><span class="header-section-number">1</span> El software</a></li>
+<li><a class="" href="tipos-de-datos-y-objetos-en-r.html"><span class="header-section-number">2</span> Tipos de datos y objetos en R</a></li>
+<li><a class="" href="lectura-de-archivos.html"><span class="header-section-number">3</span> Lectura de archivos</a></li>
+<li><a class="" href="an%C3%A1lisis-exploratorio-de-datos.html"><span class="header-section-number">4</span> Análisis exploratorio de datos</a></li>
+<li><a class="" href="an%C3%A1lisis-descriptivo-para-variables-correlacionadas.html"><span class="header-section-number">5</span> Análisis descriptivo para variables correlacionadas</a></li>
+<li><a class="active" href="intervalos-de-confianza.html"><span class="header-section-number">6</span> Intervalos de confianza</a></li>
+<li><a class="" href="intervalo-de-confianza-y-prueba-de-hip%C3%B3tesis-para-comparar-dos-medias.html"><span class="header-section-number">7</span> Intervalo de confianza y prueba de hipótesis para comparar dos medias</a></li>
+<li><a class="" href="an%C3%A1lisis-de-varianza-en-una-clasificaci%C3%B3n.html"><span class="header-section-number">8</span> Análisis de varianza en una clasificación</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="intervalos-de-confianza" class="section level1" number="6">
+<h1>
+<span class="header-section-number">Capítulo 6</span> Intervalos de confianza<a class="anchor" aria-label="anchor" href="#intervalos-de-confianza"><i class="fas fa-link"></i></a>
+</h1>
+<p>Un intervalo de confianza es un rango de valores que se utiliza en estadística para estimar un parámetro desconocido de una población en base a una muestra de datos. Comunmente el parámetro desconocido es la media, una proporción o la varianza. Su objetivo es para proporcionar una medida de la incertidumbre asociada con la estimación del parámetro en cuestión.</p>
+<p>La intención del siguiente ejercicio es comprender el significado de nivel de confianza <span class="math inline">\(1-\alpha\)</span> de un intervalo de confianza.</p>
+<p>Para ésto, se simulan a continuación 25 muestras de tamaño 20 cada una, de datos provenientes de una distribución normal con media <span class="math inline">\(\mu = 10\)</span> y desviación estándar <span class="math inline">\(\sigma = 2\)</span>.</p>
+<p>Para cada una de las muestras se calcula un <strong>intervalo de confianza</strong> del <span class="math inline">\(95\)</span>% para la media <span class="math inline">\(\mu\)</span>, utilizando un estadístico <span class="math inline">\(t\)</span>-Student. Por medio de una gráfica se explora cuántos de estos intervalos capturaron el verdadero valor de <span class="math inline">\(\mu =10\)</span>:</p>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mu</span> <span class="op">&lt;-</span> <span class="fl">10</span> <span class="co"># media</span></span>
+<span><span class="va">sigma</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="co"># desviación estándar</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">20</span> <span class="co"># tamaño de muestra</span></span>
+<span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fl">25</span> <span class="co"># cantidad de muestras</span></span>
+<span></span>
+<span><span class="co"># inicializamos vectores vacíos</span></span>
+<span><span class="va">pvalor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="va">m</span><span class="op">)</span> </span>
+<span><span class="va">resultado1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="va">m</span><span class="op">)</span></span>
+<span><span class="va">resultado2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="va">m</span><span class="op">)</span></span>
+<span><span class="va">medias</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="va">m</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Repetir m veces el procedimiento</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">m</span><span class="op">)</span></span>
+<span><span class="op">{</span></span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>,<span class="va">mu</span>,<span class="va">sigma</span><span class="op">)</span></span>
+<span>  <span class="va">medias</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="va">pvalor</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">x</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span>, </span>
+<span>                      mu<span class="op">=</span><span class="fl">10</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span></span>
+<span>  <span class="va">resultado1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">x</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span>,</span>
+<span>                          mu<span class="op">=</span><span class="fl">10</span><span class="op">)</span><span class="op">$</span><span class="va">conf.int</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span>  <span class="va">resultado2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">x</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span>,</span>
+<span>                          mu<span class="op">=</span><span class="fl">10</span><span class="op">)</span><span class="op">$</span><span class="va">conf.int</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Cargamos el paquete plotrix</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">plotrix</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Usamos la función plotCI() del paquete plotrix para graficar los IC</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/plotrix/man/plotCI.html">plotCI</a></span><span class="op">(</span><span class="va">pvalor</span>, <span class="va">medias</span>, ui <span class="op">=</span> <span class="va">resultado2</span>, li <span class="op">=</span> <span class="va">resultado1</span>, </span>
+<span>       yab <span class="op">=</span><span class="st">"Intervalos al 95% de confianza"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="va">mu</span>,col<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-57-1.png" width="672"></div>
+<p>y podemos detallar la información sobre los 25 intervalos,</p>
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">resultgral</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">pvalor</span>, <span class="va">resultado1</span>,<span class="va">resultado2</span><span class="op">)</span></span>
+<span><span class="va">resultgral</span></span></code></pre></div>
+<pre><code>##           pvalor resultado1 resultado2
+##  [1,] 0.84425184   8.919954   10.89236
+##  [2,] 0.99300988   8.872598   11.13701
+##  [3,] 0.59270993   8.693890   10.76716
+##  [4,] 0.27711070   8.545028   10.44124
+##  [5,] 0.48276349   8.733994   10.62069
+##  [6,] 0.41159357   9.035112   10.41242
+##  [7,] 0.57764922   8.770119   10.70589
+##  [8,] 0.66675699   8.486757   10.99010
+##  [9,] 0.82758039   9.321740   10.83827
+## [10,] 0.40686964   9.341900   11.55499
+## [11,] 0.31119575   9.532519   11.39165
+## [12,] 0.22755632   9.656171   11.35737
+## [13,] 0.28557059   9.584186   11.33497
+## [14,] 0.54306252   9.153767   10.45979
+## [15,] 0.38176394   9.389646   11.52306
+## [16,] 0.07497648   9.895184   11.99318
+## [17,] 0.95715786   9.073281   10.87974
+## [18,] 0.15998264   8.573605   10.25301
+## [19,] 0.68976434   8.797933   10.81203
+## [20,] 0.49078880   9.281134   11.44546
+## [21,] 0.62030521   8.581386   10.86832
+## [22,] 0.15052844   9.731716   11.61955
+## [23,] 0.06566659   9.940580   11.72115
+## [24,] 0.25824915   9.648684   11.23418
+## [25,] 0.76800829   9.152745   11.12993</code></pre>
+<p>Si contamos la cantidad de veces que los intervalos capturaron el valor real <span class="math inline">\(\mu=10\)</span>,</p>
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cont</span><span class="op">=</span><span class="fl">0</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">m</span><span class="op">)</span></span>
+<span><span class="op">{</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="va">mu</span><span class="op">&gt;</span> <span class="va">resultado1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&amp;&amp;</span> <span class="va">mu</span> <span class="op">&lt;</span> <span class="va">resultado2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span>    <span class="va">cont</span><span class="op">=</span><span class="va">cont</span><span class="op">+</span><span class="fl">1</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">cont</span></span></code></pre></div>
+<pre><code>## [1] 25</code></pre>
+<p>y calculamos la proporción de veces que ésto ocurre,</p>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cont</span><span class="op">/</span><span class="fl">25</span></span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>podemos ver es un valor muy cercano al 95%.</p>
+
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="an%C3%A1lisis-descriptivo-para-variables-correlacionadas.html"><span class="header-section-number">5</span> Análisis descriptivo para variables correlacionadas</a></div>
+<div class="next"><a href="intervalo-de-confianza-y-prueba-de-hip%C3%B3tesis-para-comparar-dos-medias.html"><span class="header-section-number">7</span> Intervalo de confianza y prueba de hipótesis para comparar dos medias</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#intervalos-de-confianza"><span class="header-section-number">6</span> Intervalos de confianza</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Introducción al software R</strong>" was written by Figueroa Preciado Gudelia,
+Hernández Amador Rosalía Gpe., Montoya Laos José. It was last built on 2023-11-03.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

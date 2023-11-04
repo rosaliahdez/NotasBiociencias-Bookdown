@@ -1,0 +1,44 @@
+# El software
+
+Estas notas ofrecen una introducción práctica al uso del software estadístico R mediante la interfaz gráfica RStudio. Es por ésto que para un mejor entendimiento de los conceptos y comandos que aquí se exponen, se exhorta al usuario a poner en práctica las instrucciones aquí documentadas.
+
+## R y RStudio
+
+El software **R** es tanto un entorno de programación, como un lenguaje de programación, diseñado para hacer análisis estadístico. Es de código abierto, gratuito y multiplataforma, características que lo han convertido en una herramienta ampliamente utilizada en el campo de la estadística y el análisis de datos.
+
+Por otro lado, **RStudio** es un entorno de desarrollo integrado (IDE) para trabajar con el lenguaje de programación R. Es una plataforma amigable para el usuario, y entre otras propiedades, facilita la escritura de código, visualización, generación de informes  reproducibles y la exportación de resultados en diversos formatos.
+
+El entorno RStudio, puede utilizarse de manera gratuita ingresando a través de una cuenta en Posit <https://posit.co/> o mediante la instalación previa de R y RStudio en gran variedad de sistemas operativos.
+
+Para instalar R, podemos ingresar a la página <https://www.r-project.org> y descargar e instalar la última versión del software.
+
+A continuación, para instalar RStudio, ingresamos a la página <https://www.posit.co> y descargamos e instalamos la interfaz gráfica RStudio.
+
+![](RyRStudio.png) 
+
+## RScripts
+
+Un **Rscript** es un archivo de texto compuesto de una serie de comandos e instrucciones escritos en el lenguaje de programación R, que al ser ejecutados realizan tareas específicas como leer y manipular datos, realizar análisis estadísticos o generar gráficos.
+
+Una vez instalado RStudio, podemos abrir un RScript nuevo para escribir y documentar la secuencia de comandos que nos permitirá realizar alguna tarea determinada. Una buena práctica es incluir comentarios en este documento que describan lo que hace cada comando, y que nos permita documentar el código y facilitar su comprensión.
+
+Los Rscripts permiten la reproducibilidad de los análisis resultantes, pues al guardar y compartir un Rscript con otros usuarios, éstos pueden ejecutar los mismos comandos para obtener resultados idénticos.
+
+## Librería del usuario
+
+Al instalar el software R, se instala automáticamente una colección de **paquetes del sistema base**, que se almacenan en una librería. Estos paquetes se componen de funciones básicas del sistema que nos permiten realizar tareas comunes para la manipulación y el análisis de datos.
+
+Adicionalmente, podemos instalar paquetes que nos permiten extender la funcionalidad del sistema base de R. Por ejemplo, podemos ampliar la capacidad de R para la generación de gráficos más atractivos, o para el análisis de datos en áreas especializadas como el estudio de series temporales, o para realizar análisis espaciales con el manejo de datos geoespaciales. 
+
+En el repositorio centralizado CRAN (Comprehensive R Archive Network) se albergan miles de paquetes creados por la comunidad de usuarios de R, disponibles para su descarga.
+
+Para utilizar un paquete en R, primero debemos instalarlo y luego cargarlo en la sesión. Una vez cargado, podremos acceder a las funciones y capacidades que proporciona. A lo largo de este texto se explica el uso de una gran variedad de paquetes especializados para ejecutar ciertas tareas.
+
+## Datasets integrados
+
+Existen algunos conjuntos de datos que se incluyen como parte de la instalación del sistema base de R, que se denominan **datasets**, los cuales son proporcionados por los desarrolladores del software y están disponibles para que los usuarios los utilicen directamente en su sesión, sin necesidad de descargar o importar datos desde fuentes externas.
+
+Los datasets integrados en el sistema base de R son útiles para realizar ejemplos y pruebas, así como para aprender y practicar análisis de datos en R.
+
+En estas notas se muestra el uso de algunas técnicas estadísticas aplicadas en datasets cargados en el sistema base de R.
+

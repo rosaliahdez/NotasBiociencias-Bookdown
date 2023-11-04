@@ -1,0 +1,126 @@
+# Análisis descriptivo para variables correlacionadas
+
+Para comprender la relación entre dos variables y tomar decisiones sobre posibles análisis posteriores, un estudio común en estadística suele consistir en investigar si dos variables se encuentran correlacionadas. Usualmente se calcula un valor numérico de dicha correlación y se complementa el estudio con un análisis gráfico.
+
+## Ejemplo 1
+
+Consideremos un experimento donde se registraron datos de la edad gestacional y peso al nacer de un grupo de 17 bebés.
+
+```{r}
+edad_ges <- c(34.7, 36,29.3, 40.1, 35.7, 42.4, 40.3, 37.3, 40.9, 
+              38.3, 38.5, 41.4, 39.7, 39.7, 41.1, 38, 38.7)
+
+peso_nacer <- c(1895, 2030, 1440, 2835, 3090, 3827, 3260, 2690, 
+                3885, 2920, 3430, 3657, 3685, 3345, 3260, 2680, 2005)
+```
+
+Para comprender la relación entre estas dos variables, se puede calcular su **correlación**,
+
+```{r}
+cor(edad_ges,peso_nacer)
+```
+
+y reforzar el resultado numérico obtenido, mediante un **diagrama de dispersión** 
+
+```{r}
+plot(edad_ges,peso_nacer)
+```
+
+Podemos ajustar un modelo de **regresión lineal**, para establecer la relación lineal de una variable respecto a la otra,
+
+```{r}
+reg1 <- lm(peso_nacer ~ edad_ges)
+```
+
+y solicitar los detalles del modelo con la siguiente instrucción,
+
+```{r}
+summary(reg1) 
+```
+
+podemos además ajustar la línea de regresión en el diagrama de dispersión,
+
+```{r}
+plot(edad_ges,peso_nacer)
+abline(reg1)
+```
+
+Para extraer información específica asociada al modelo, como por ejemplo sus coeficientes, podemos usar la siguiente instrucción,
+
+```{r}
+reg1$coefficients
+```
+
+y analizar el comportamiento de los residuales gráficamente
+
+```{r}
+plot(reg1$residuals)
+abline(h=0)
+```
+
+
+## Ejemplo 2
+
+A manera de ilustración del uso de datasets integrados en R, y para destacar la importancia de analizar un conjunto de datos desde diferentes perspectivas, a  continuación se analiza el dataset `Anscombre`, el cual fué creado por el estadístico Francis Ascombre y publicado en 1973 en The American Statistician.
+
+En primer lugar cargamos el conjunto de datos Anscombe,
+
+```{r}
+data(anscombe)
+```
+
+y podemos mostrar el contenido del dataset
+
+```{r}
+anscombe
+```
+
+
+Como podemos observar, este dataset consta de cuatro subconjuntos de datos, con 11 pares de observaciones cada uno del tipo $(x_i,y_i), i = 1, ..., 4$. 
+
+Para poder utilizar en el análisis siguiente los nombres de las variables tal y como aparecen en la tabla, utilizamos la instrucción `attach()`,
+
+```{r}
+rm(list = ls())
+attach(anscombe)
+```
+
+
+Como podemos ver con los siguientes cálculos, estos cuatro subconjuntos tienen propiedades estadísticas muy similares, pues si ajustamos un modelo de regresión a cada subconjunto, obtenemos lo siguiente:
+
+```{r}
+regresion1 <- lm(y1 ~ x1)
+regresion1
+```
+
+```{r}
+regresion2 <- lm(y2 ~ x2)
+regresion2
+```
+
+
+```{r}
+regresion3 <- lm(y3~ x3)
+regresion3
+```
+
+
+```{r}
+regresion4 <- lm(y4~x4)
+regresion4
+```
+
+
+sin embargo, al momento de representar gráficamente el comportamiento de los cuatro conjuntos de datos mediante diagramas de dispersión, podemos comprobar que difieren significativamente 
+
+```{r}
+par(mfrow = c(2,2))
+plot(x1,y1)
+plot(x2,y2)
+plot(x3,y3)
+plot(x4,y4)
+```
+
+
+Este conjunto de datos, precargado en R, es un ejemplo claro de la importancia de la visualización de datos en el análisis estadístico.
+

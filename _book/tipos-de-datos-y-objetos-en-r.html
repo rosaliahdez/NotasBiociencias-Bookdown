@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 2 Tipos de datos y objetos en R | Introducción al software R</title>
+<meta name="author" content="Figueroa Preciado Gudelia, Hernández Amador Rosalía Gpe., Montoya Laos José">
+<meta name="generator" content="bookdown 0.36 with bs4_book()">
+<meta property="og:title" content="Capítulo 2 Tipos de datos y objetos en R | Introducción al software R">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 2 Tipos de datos y objetos en R | Introducción al software R">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+<meta name="description" content="R es un lenguaje de programación orientado a objetos, lo que significa que se centra en la manipulación de objetos y datos. Estos objetos nos permiten almacenar y manipular información. Por...">
+<meta property="og:description" content="R es un lenguaje de programación orientado a objetos, lo que significa que se centra en la manipulación de objetos y datos. Estos objetos nos permiten almacenar y manipular información. Por...">
+<meta name="twitter:description" content="R es un lenguaje de programación orientado a objetos, lo que significa que se centra en la manipulación de objetos y datos. Estos objetos nos permiten almacenar y manipular información. Por...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Introducción al software R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Prefacio</a></li>
+<li><a class="" href="el-software.html"><span class="header-section-number">1</span> El software</a></li>
+<li><a class="active" href="tipos-de-datos-y-objetos-en-r.html"><span class="header-section-number">2</span> Tipos de datos y objetos en R</a></li>
+<li><a class="" href="lectura-de-archivos.html"><span class="header-section-number">3</span> Lectura de archivos</a></li>
+<li><a class="" href="an%C3%A1lisis-exploratorio-de-datos.html"><span class="header-section-number">4</span> Análisis exploratorio de datos</a></li>
+<li><a class="" href="an%C3%A1lisis-descriptivo-para-variables-correlacionadas.html"><span class="header-section-number">5</span> Análisis descriptivo para variables correlacionadas</a></li>
+<li><a class="" href="intervalos-de-confianza.html"><span class="header-section-number">6</span> Intervalos de confianza</a></li>
+<li><a class="" href="intervalo-de-confianza-y-prueba-de-hip%C3%B3tesis-para-comparar-dos-medias.html"><span class="header-section-number">7</span> Intervalo de confianza y prueba de hipótesis para comparar dos medias</a></li>
+<li><a class="" href="an%C3%A1lisis-de-varianza-en-una-clasificaci%C3%B3n.html"><span class="header-section-number">8</span> Análisis de varianza en una clasificación</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="tipos-de-datos-y-objetos-en-r" class="section level1" number="2">
+<h1>
+<span class="header-section-number">Capítulo 2</span> Tipos de datos y objetos en R<a class="anchor" aria-label="anchor" href="#tipos-de-datos-y-objetos-en-r"><i class="fas fa-link"></i></a>
+</h1>
+<p>R es un lenguaje de programación orientado a objetos, lo que significa que se centra en la manipulación de objetos y datos. Estos objetos nos permiten almacenar y manipular información.</p>
+<p>Por ejemplo, en una <strong>variable</strong> podemos almacenar datos, los cuales pueden ser de distintos tipos como cadenas de caracteres, números enteros, números decimales, números complejos y valores lógicos (verdadero o falso).</p>
+<p>Por otro lado, las <strong>funciones</strong> en R, son objetos que nos permiten manipular información para realizar operaciones específicas. Las funciones pueden tomar <strong>argumentos o parámetros</strong> que determinan cómo se ejecutan esas operaciones. Las funciones en R pueden ser funciones propias del lenguaje, o funciones definidas por el mismo usuario.</p>
+<p>Se describen a continuación algunos otros objetos comunmente utilizados en R.</p>
+<div id="vectores" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Vectores<a class="anchor" aria-label="anchor" href="#vectores"><i class="fas fa-link"></i></a>
+</h2>
+<p>Los <strong>vectores</strong> son una de las estructuras de datos más fundamentales en R. Un vector es una secuencia ordenada de elementos del mismo tipo, y pueden ser de tipo numérico, de caracteres, lógicos u otros tipos.</p>
+<p>Por ejemplo, (0,1, 2, 3, 25, 23) es un vector numérico, que puede ser creado utilizando la función <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> del sistema base de R la cual concatena elementos, y puede ser almacenado en la variable <code>x</code> mediante el símbolo de asignación <code>&lt;-</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">25</span>, <span class="fl">23</span><span class="op">)</span></span>
+<span><span class="va">x</span></span></code></pre></div>
+<pre><code>## [1]  0  1  2  3 25 23</code></pre>
+<p>Podemos utilizar otras funciones para examinar distintas características de los objetos que creamos o que importamos. Por ejemplo, para verificar el tipo de objeto que almacenamos en la variable <code>x</code> podemos usar la función <code><a href="https://rdrr.io/r/base/class.html">class()</a></code>,</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "numeric"</code></pre>
+<p>que indica que <code>x</code> es un vector numérico. Si además queremos investigar el tipo de datos que componen al objeto <code>x</code>, utilizamos la función <code><a href="https://rdrr.io/r/base/typeof.html">typeof()</a></code>,</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "double"</code></pre>
+<p>que nos indica que los elementos numéricos son de hecho valores reales.</p>
+<p>Otras características que podemos examinar es la longitud del vector,</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<p>o incluso podemos efectuar operaciones con los elementos almacenados en él, como por ejemplo, podemos sumar sus entradas con el comando <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 54</code></pre>
+<p>Otros ejemplos de vectores son:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span> <span class="co"># vector de caracteres</span></span>
+<span></span>
+<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">T</span>, <span class="cn">T</span>, <span class="cn">F</span>, <span class="cn">F</span><span class="op">)</span> <span class="co"># vector de elementos lógicos</span></span>
+<span></span>
+<span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span> <span class="co"># vector numérico con elementos enteros sucesivos del 5 al 9</span></span></code></pre></div>
+<p>Podemos también crear nuevos vectores a partir de otros dados, por ejemplo utilizando la función <code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">y</span>, times <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##  [1] "A" "B" "C" "A" "B" "C" "A" "B" "C" "A" "B" "C"</code></pre>
+<p>instrucción con la que se ha concatenado 4 veces el vector <code>y</code>.</p>
+</div>
+<div id="matrices" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Matrices<a class="anchor" aria-label="anchor" href="#matrices"><i class="fas fa-link"></i></a>
+</h2>
+<p>Las <strong>matrices</strong> son estructuras bidimensionales en la que los datos están organizados en renglones y columnas. Todas las entradas de una matriz deben constar de elementos del mismo tipo de datos.</p>
+<p>Por ejemplo, podemos manipular vectores para crear una matriz. Con la función <code><a href="https://rdrr.io/r/base/cbind.html">cbind()</a></code>, se pueden unir dos vectores para formar las columnas de una matriz</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vec1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">vec2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">4</span>, <span class="op">-</span><span class="fl">5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>Columna_1 <span class="op">=</span> <span class="va">vec1</span>, Columna_2<span class="op">=</span> <span class="va">vec2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##      Columna_1 Columna_2
+## [1,]         1        -1
+## [2,]         2        -2
+## [3,]         3        -3
+## [4,]         4        -4
+## [5,]         5        -5</code></pre>
+<p>o combinar por filas los vectores utilizando la función <code><a href="https://rdrr.io/r/base/cbind.html">rbind()</a></code>.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span>Renglon_1 <span class="op">=</span> <span class="va">vec1</span>,Renglon_2 <span class="op">=</span> <span class="va">vec2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##           [,1] [,2] [,3] [,4] [,5]
+## Renglon_1    1    2    3    4    5
+## Renglon_2   -1   -2   -3   -4   -5</code></pre>
+</div>
+<div id="dataframes" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Dataframes<a class="anchor" aria-label="anchor" href="#dataframes"><i class="fas fa-link"></i></a>
+</h2>
+<p>Un <strong>data frame</strong> es una estructura bidimensional que se utiliza generalmente para almacenar datos tabulares. Cada columna de un data frame puede ser de un tipo diferente.</p>
+<p>Los data frames son similares a las tablas de una base de datos u hojas de cálculo, donde las columnas representan variables, y los renglones corresponden a observaciones.</p>
+<p>Existen algunos comandos que son especialmente útiles para indagar el contenido de una base de datos, especialmente cuando éstas son de gran tamaño.
+Por ejemplo, supongamos que tenemos los tratamientos 1, 2 y 3, y que para cada uno de los tratamientos se utilizaron distintas unidades experimentales sobre las cuales se tomó una medición:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Almacenamos los datos en dos columnas</span></span>
+<span><span class="va">datos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Tratamiento <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span><span class="op">)</span>, <span class="fl">6</span><span class="op">)</span>, </span>
+<span>                    Tiempo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">14</span>, <span class="fl">16</span>, <span class="fl">13</span>, </span>
+<span>                               <span class="fl">24</span>, <span class="fl">25</span>, <span class="fl">21</span>, </span>
+<span>                               <span class="fl">18</span>, <span class="fl">19</span>, <span class="fl">14</span>, </span>
+<span>                               <span class="fl">12</span>, <span class="fl">16</span>, <span class="fl">17</span>, </span>
+<span>                               <span class="fl">23</span>, <span class="fl">22</span>, <span class="fl">21</span>, </span>
+<span>                               <span class="fl">25</span>, <span class="fl">23</span>, <span class="fl">22</span><span class="op">)</span></span>
+<span>                    <span class="op">)</span></span>
+<span><span class="va">datos</span></span></code></pre></div>
+<pre><code>##    Tratamiento Tiempo
+## 1            1     14
+## 2            2     16
+## 3            3     13
+## 4            1     24
+## 5            2     25
+## 6            3     21
+## 7            1     18
+## 8            2     19
+## 9            3     14
+## 10           1     12
+## 11           2     16
+## 12           3     17
+## 13           1     23
+## 14           2     22
+## 15           3     21
+## 16           1     25
+## 17           2     23
+## 18           3     22</code></pre>
+<p>Podemos analizar la estructura de la tabla utilizando la función <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code>,</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">datos</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 'data.frame':    18 obs. of  2 variables:
+##  $ Tratamiento: chr  "1" "2" "3" "1" ...
+##  $ Tiempo     : num  14 16 13 24 25 21 18 19 14 12 ...</code></pre>
+<p>que nos indica las características generales del dataframe, esto es, su tamaño, los nombres de las columnas, y el tipo de datos almacenados en cada columna.</p>
+<p>Puede también ser útil visualizar los primeros renglones de la tabla, lo que podemos solicitar utilizando la función <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code>,</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Imprimir los primeros tres renglones del dataframe</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">datos</span>,<span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   Tratamiento Tiempo
+## 1           1     14
+## 2           2     16
+## 3           3     13</code></pre>
+<p>y de manera similar, para visualizar lo últimos tres renglones, podmeos utilizar la función <code><a href="https://rdrr.io/r/utils/head.html">tail()</a></code></p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Imprimir los últimos tres renglones</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">datos</span>,<span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##    Tratamiento Tiempo
+## 16           1     25
+## 17           2     23
+## 18           3     22</code></pre>
+<p>Al conocer el tipo de contenido de las bases de datos, tendremos un mejor entendiemiento de cómo manipular la información para realizar análisis más específicos.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="el-software.html"><span class="header-section-number">1</span> El software</a></div>
+<div class="next"><a href="lectura-de-archivos.html"><span class="header-section-number">3</span> Lectura de archivos</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#tipos-de-datos-y-objetos-en-r"><span class="header-section-number">2</span> Tipos de datos y objetos en R</a></li>
+<li><a class="nav-link" href="#vectores"><span class="header-section-number">2.1</span> Vectores</a></li>
+<li><a class="nav-link" href="#matrices"><span class="header-section-number">2.2</span> Matrices</a></li>
+<li><a class="nav-link" href="#dataframes"><span class="header-section-number">2.3</span> Dataframes</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Introducción al software R</strong>" was written by Figueroa Preciado Gudelia,
+Hernández Amador Rosalía Gpe., Montoya Laos José. It was last built on 2023-11-03.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

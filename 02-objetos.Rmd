@@ -1,0 +1,129 @@
+# Tipos de datos y objetos en R
+
+R es un lenguaje de programación orientado a objetos, lo que significa que se centra en la manipulación de objetos y datos. Estos objetos nos permiten almacenar y manipular información.
+
+Por ejemplo, en una **variable** podemos almacenar datos, los cuales pueden ser de distintos tipos como cadenas de caracteres, números enteros, números decimales, números complejos y valores lógicos (verdadero o falso). 
+
+Por otro lado, las **funciones** en R, son objetos que nos permiten manipular información para realizar operaciones específicas. Las funciones pueden tomar **argumentos o parámetros** que determinan cómo se ejecutan esas operaciones. Las funciones en R pueden ser funciones propias del lenguaje, o funciones definidas por el mismo usuario.
+
+Se describen a continuación algunos otros objetos comunmente utilizados en R.
+
+## Vectores
+
+Los **vectores** son una de las estructuras de datos más fundamentales en R. Un vector es una secuencia ordenada de elementos del mismo tipo, y pueden ser de tipo numérico, de caracteres, lógicos u otros tipos.
+
+Por ejemplo, (0,1, 2, 3, 25, 23) es un vector numérico, que puede ser creado utilizando la función `c()` del sistema base de R la cual concatena elementos, y puede ser almacenado en la variable `x` mediante el símbolo de asignación `<-`:
+
+```{r}
+x <- c(0, 1, 2, 3, 25, 23)
+x
+```
+
+Podemos utilizar otras funciones para examinar distintas características de los objetos que creamos o que importamos. Por ejemplo, para verificar el tipo de objeto que almacenamos en la variable `x` podemos usar la función `class()`,
+
+```{r}
+class(x)
+```
+que indica que `x` es un vector numérico. Si además queremos investigar el tipo de datos que componen al objeto `x`, utilizamos la función `typeof()`,
+
+```{r}
+typeof(x)
+```
+que nos indica que los elementos numéricos son de hecho valores reales. 
+
+Otras características que podemos examinar es la longitud del vector, 
+
+```{r}
+length(x)
+```
+o incluso podemos efectuar operaciones con los elementos almacenados en él, como por ejemplo, podemos sumar sus entradas con el comando `sum()`
+
+```{r}
+sum(x)
+```
+
+
+Otros ejemplos de vectores son:
+
+```{r}
+y <- c("A", "B", "C") # vector de caracteres
+
+z <- c(T, T, F, F) # vector de elementos lógicos
+
+w <- c(5:9) # vector numérico con elementos enteros sucesivos del 5 al 9
+```
+
+Podemos también crear nuevos vectores a partir de otros dados, por ejemplo utilizando la función `rep()`
+
+```{r}
+rep(y, times = 4)
+```
+instrucción con la que se ha concatenado 4 veces el vector `y`.
+
+## Matrices
+
+Las **matrices** son estructuras bidimensionales en la que los datos están organizados en renglones y columnas. Todas las entradas de una matriz deben constar de elementos del mismo tipo de datos.
+
+Por ejemplo, podemos manipular vectores para crear una matriz. Con la función `cbind()`, se pueden unir dos vectores para formar las columnas de una matriz
+
+```{r}
+vec1 <- c(1, 2, 3, 4, 5)
+vec2 <- c(-1, -2, -3, -4, -5)
+cbind(Columna_1 = vec1, Columna_2= vec2)
+```
+
+o combinar por filas los vectores utilizando la función `rbind()`. 
+
+```{r}
+rbind(Renglon_1 = vec1,Renglon_2 = vec2)
+```
+
+
+## Dataframes
+
+Un **data frame** es una estructura bidimensional que se utiliza generalmente para almacenar datos tabulares. Cada columna de un data frame puede ser de un tipo diferente.
+
+Los data frames son similares a las tablas de una base de datos u hojas de cálculo, donde las columnas representan variables, y los renglones corresponden a observaciones. 
+
+Existen algunos comandos que son especialmente útiles para indagar el contenido de una base de datos, especialmente cuando éstas son de gran tamaño. 
+Por ejemplo, supongamos que tenemos los tratamientos 1, 2 y 3, y que para cada uno de los tratamientos se utilizaron distintas unidades experimentales sobre las cuales se tomó una medición:
+
+```{r}
+# Almacenamos los datos en dos columnas
+datos <- data.frame(Tratamiento = rep(c("1", "2", "3"), 6), 
+                    Tiempo = c(14, 16, 13, 
+                               24, 25, 21, 
+                               18, 19, 14, 
+                               12, 16, 17, 
+                               23, 22, 21, 
+                               25, 23, 22)
+                    )
+datos
+```
+
+Podemos analizar la estructura de la tabla utilizando la función `str()`,
+
+```{r}
+str(datos)
+```
+
+que nos indica las características generales del dataframe, esto es, su tamaño, los nombres de las columnas, y el tipo de datos almacenados en cada columna.
+
+Puede también ser útil visualizar los primeros renglones de la tabla, lo que podemos solicitar utilizando la función `head()`,
+
+```{r}
+# Imprimir los primeros tres renglones del dataframe
+head(datos,3)
+```
+
+y de manera similar, para visualizar lo últimos tres renglones, podmeos utilizar la función `tail()`
+
+
+```{r}
+# Imprimir los últimos tres renglones
+tail(datos,3)
+```
+
+Al conocer el tipo de contenido de las bases de datos, tendremos un mejor entendiemiento de cómo manipular la información para realizar análisis más específicos.
+
+

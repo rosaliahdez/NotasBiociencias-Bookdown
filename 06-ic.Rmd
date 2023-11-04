@@ -1,0 +1,72 @@
+# Intervalos de confianza
+
+Un intervalo de confianza es un rango de valores que se utiliza en estadística para estimar un parámetro desconocido de una población en base a una muestra de datos. Comunmente el parámetro desconocido es la media, una proporción o la varianza. Su objetivo es para proporcionar una medida de la incertidumbre asociada con la estimación del parámetro en cuestión.
+
+La intención del siguiente ejercicio es comprender el significado de nivel de confianza $1-\alpha$ de un intervalo de confianza. 
+
+Para ésto, se simulan a continuación 25 muestras de tamaño 20 cada una, de datos provenientes de una distribución normal con media $\mu = 10$ y desviación estándar $\sigma = 2$. 
+
+Para cada una de las muestras se calcula un **intervalo de confianza** del $95$% para la media $\mu$, utilizando un estadístico $t$-Student. Por medio de una gráfica se explora cuántos de estos intervalos capturaron el verdadero valor de $\mu =10$:
+
+```{r, warning=FALSE}
+mu <- 10 # media
+sigma <- 2 # desviación estándar
+n <- 20 # tamaño de muestra
+m <- 25 # cantidad de muestras
+
+# inicializamos vectores vacíos
+pvalor <- rep(NA,m) 
+resultado1 <- rep(NA,m)
+resultado2 <- rep(NA,m)
+medias <- rep(NA,m)
+
+# Repetir m veces el procedimiento
+for(i in 1:m)
+{
+  x <- rnorm(n,mu,sigma)
+  medias[i] <- mean(x)
+  pvalor[i] <- t.test(x, alternative = "two.sided", 
+                      mu=10)$p.value
+  resultado1[i] <- t.test(x, alternative = "two.sided",
+                          mu=10)$conf.int[1]
+  resultado2[i] <- t.test(x, alternative = "two.sided",
+                          mu=10)$conf.int[2]
+}
+
+# Cargamos el paquete plotrix
+library(plotrix)
+
+# Usamos la función plotCI() del paquete plotrix para graficar los IC
+plotCI(pvalor, medias, ui = resultado2, li = resultado1, 
+       yab ="Intervalos al 95% de confianza")
+abline(h=mu,col="blue")
+```
+
+ y podemos detallar la información sobre los 25 intervalos, 
+
+```{r}
+resultgral <- cbind(pvalor, resultado1,resultado2)
+resultgral
+```
+
+Si contamos la cantidad de veces que los intervalos capturaron el valor real $\mu=10$,
+
+```{r}
+cont=0
+for(i in 1:m)
+{
+  if(mu> resultado1[i] && mu < resultado2[i])
+    cont=cont+1
+}
+cont
+```
+
+
+y calculamos la proporción de veces que ésto ocurre, 
+
+```{r}
+cont/25
+```
+
+podemos ver es un valor muy cercano al 95%.
+

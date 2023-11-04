@@ -1,0 +1,162 @@
+# Análisis exploratorio de datos
+
+Para comprender el comportamiento de un conjunto de datos, antes de aplicar técnicas más especializadas de la estadística, se suele realizar en primer lugar un análisis exploratprio de datos, con el objetivo de visualizar y comprender la distribución de los datos.
+
+## Ejemplo 1
+
+Supongamos que registramos la cantidad de respuestas correctas logradas en un exámen, aplicado a un grupo de 15 estudiantes:  
+
+```{r}
+respuestas <- c(2, 4, 4, 3, 5, 5, 6, 3, 7, 8, 3, 4, 5, 5, 4)
+```
+
+podemos crear una **tabla de frecuencias absolutas** con la siguiente instrucción:
+
+```{r}
+table(respuestas)
+```
+
+y elaborar una gráfica sencilla, pero de gran utilidad como lo es un **diagrama de barras**
+
+```{r}
+barplot(table(respuestas), 
+        main = "Número de respuestas correctas", 
+        col = "blue")
+```
+
+Además, podemos calcular fácilmente  algunas medidas descriptivas. Por ejemplo, podemos examinar el valor mínimo y máximo ordenando las observaciones como sigue:
+
+```{r}
+sort(respuestas)
+```
+
+calcular la **media**,
+
+```{r}
+mean(respuestas)
+```
+
+la **mediana**,
+
+```{r}
+median(respuestas)
+```
+
+la **varianza**,
+
+```{r}
+var(respuestas)
+```
+
+la **desviación estándar**,
+
+```{r}
+sd(respuestas)
+```
+
+los **cuartiles**,
+
+```{r}
+quantile(respuestas)
+```
+especificar otros cuantiles deseados
+
+```{r}
+quantile(respuestas, c(0.1,0.5,0.9))
+```
+
+o podemos solicitar un resumen de las estadísticas descriptivas anteriores con la función `summary()`,
+
+```{r}
+summary(respuestas)
+```
+
+## Ejemplo 2
+
+Consideremos ahora otro conjunto de datos,
+
+```{r}
+datos2 <- c(2.4, 2.6, 1.3, 2.7, 3.1, 3.4, 3.6, 2.5, 3.7, 
+            3.9, 4.2, 4.1, 4.5, 5.2, 3.3, 1.6, 3.7,7.6)
+```
+
+Otra herramienta visual de la estadística descriptiva que podemos realizar en un conjunto de datos para analizar su distribución, es la construcción de un **diagrma de tallo y hojas**. Para elaborarlo, primero ordenamos los datos,
+
+```{r}
+sort(datos2)
+```
+
+y graficamos el diagrama con los datos ordenados
+
+```{r}
+stem(datos2, scale=2)
+```
+
+o podemos elaborar también **un diagrama de caja**, 
+
+```{r}
+boxplot(datos2, horizontal = T, border = "blue", 
+        xlab = "Tiempos", main = "Diagrama de caja")
+```
+
+
+## Ejemplo 3
+
+Simulemos ahora una muestra aleatoria de 100 observaciones provenientes de una distribución normal, con media $\mu = 20$ y desviación estándar $\sigma = 3$,
+
+```{r}
+datos3 <- rnorm(100, 20, 3)
+```
+
+Podemos analizar su distribución por medio de un histograma,
+
+```{r}
+hist(datos3)
+```
+
+y personalizar la gráfica añadiendo una curva normal,
+
+```{r}
+hist(datos3, freq = FALSE)
+ejenorm <- seq(10, 30, 0.01)
+lines(ejenorm, dnorm(ejenorm, 20,3))
+```
+
+
+## Ejemplo 4
+
+Comparemos ahora varios conjuntos de datos. Para esto, generemos dos muestras de una distribución normal, y una tercer muestra de una distribución chi cuadarada,
+
+```{r}
+x1 <- rnorm(30, 10, 1.5)
+x2 <- rnorm(30, 15, 1)
+x3 <- rchisq(30, 4)
+```
+
+Comparemos los datos de las primeras dos muestras mediante diagramas de cajas 
+
+```{r}
+boxplot(x1,x2, horizontal = TRUE)
+```
+
+
+Podemos efectuar un **gráfico cuantil-cuantil (o gráfico Q-Q)**, para comparar si las dos muestras `x1` y `x2` provienen de la misma distribución
+
+```{r}
+qqplot(x1, x2, xlim = c(4,18), ylim=c(4,18))
+```
+
+O podemos reemplazar una de las muestras en la comparación anterior, por los cuantiles de una distribución normal, para determinar si cada una de la muestras sigue una distribución normal. Por ejemplo, para la muestra `x1` obtenemos el siguiente gráfico,
+
+```{r}
+qqnorm(x1, main="qqplot de x1")
+qqline(x1,col=2)
+```
+
+y para la muestra `x3` el siguiente,
+
+```{r}
+qqnorm(x3,main="qqplot de x3")
+qqline(x3,col=2)
+```
+

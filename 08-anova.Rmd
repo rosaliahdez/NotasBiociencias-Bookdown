@@ -1,0 +1,96 @@
+# Análisis de varianza en una clasificación
+
+Para comparar las medias de más de dos grupos, podemos utilizar un **ANOVA (Analysis of variance)**. El ANOVA  compara las medias de tres o más grupos para determinar si al menos uno de los grupos es significativamente diferente de los demás. Si el ANOVA muestra diferencias significativas, se pueden realizar pruebas post hoc, como la prueba de Tukey, para identificar qué grupos específicos son diferentes entre sí.
+
+En el siguiente ejemplo se ilustra el uso de un ANOVA en una clasificación, el cual se utiliza para comparar las medias cuando solo se tiene un factor o variable independiente. 
+
+Por ejemplo, supongamos que se desea evaluar si la dosis suministrada de un tratamiento produce cambios significativos en el crecimiento de cierta clase de planta, y se cuenta con los siguientes registros, que se asumen independientes:
+
+```{r}
+altura <- c(12.4, 12.8, 12.2, 13, 14, 14.2, 11.6, 15, 12, 13.2, 
+            16, 12.6, 14.8, 13, 14, 15, 14, 17, 18, 19, 17.8, 14.4, 
+            20, 15.8, 17.0, 20.0, 19.6, 18.0, 20.2, 18.0, 21, 14.8, 
+            19.1, 15.8, 18, 20, 21.1, 22, 19, 18.2)
+
+dosis <- c(rep("dosis_50", 10), rep("dosis_100", 10), 
+           rep("dosis_200", 10), rep("dosis_400", 10))
+
+rendimiento = data.frame(altura, dosis)
+rendimiento
+```
+
+Podemos explorar el comportamiento de la variable `altura`,
+
+```{r}
+summary(altura, data = rendimiento)
+```
+
+y comparar el comportamiento por grupos,
+
+```{r}
+summary(altura[dosis == "dosis_100"])
+```
+
+```{r}
+summary(altura[dosis == "dosis_50"])
+```
+
+```{r}
+summary(altura[dosis == "dosis_200"])
+```
+
+```{r}
+summary(altura[dosis == "dosis_400"])
+```
+
+Además, podemos resumir la información, representada gráficamente por grupos como sigue,
+
+```{r}
+boxplot(altura ~ dosis, data = rendimiento)
+```
+
+Para evaluar si las varianzas de los distintos grupos son homogéneas, podemos aplicar la prueba de homogeneidad de varianzas de Bartlett, con la siguiente hipótesis nula $H_0$ e hipótesis alternativa $H_1$:
+
+$$ \begin{matrix}
+H_0:\sigma_1^2=...=\sigma_k^2\\
+H_1:\sigma_i^2 \neq \sigma_j^2, \,\, \forall i\neq j
+\end{matrix}$$ 
+
+Solicitamos a R que se aplique la prueba con la siguiente instrucción:
+
+```{r}
+bartlett.test(altura ~ dosis, data = rendimiento)
+```
+
+Una vez verificado el supuesto de homogeneidad de varianzas, podemos solicitar el análisis de varianza en una clasificación de la siguiente manera:
+
+```{r}
+aov.out <- aov(altura ~ dosis, data = rendimiento)
+summary(aov.out)
+```
+
+Extraemos ahora los residuales y los analizamos de manera gráfica, verificando su normalidad:
+
+```{r}
+aov_residuals <- aov.out$residuals
+hist(aov_residuals)
+```
+
+o utilizando una prueba cuantil-cuantil
+
+```{r}
+qqnorm(aov_residuals)
+qqline(aov_residuals,col=2)
+```
+
+o más formalmente, podemos verificar la normalidad de residuales a través de una prueba de Shapiro-Wilk:
+
+```{r}
+shapiro.test(x=aov_residuals)
+```
+
+Finalmente, podemos solicitar una prueba post Hoc, como la de Tukey, de la siguiente manera:
+
+```{r}
+TukeyHSD(aov.out, conf.level = 0.95)
+```

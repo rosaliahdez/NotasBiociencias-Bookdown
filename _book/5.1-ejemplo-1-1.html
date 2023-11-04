@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="5.1 Ejemplo 1 | Introducción al software R" />
+<meta property="og:type" content="book" />
+
+
+<meta name="github-repo" content="rstudio/bookdown-demo" />
+
+<meta name="author" content="Figueroa Preciado Gudelia, Hernández Amador Rosalía Gpe., Montoya Laos José" />
+
+<meta name="date" content="2023-11-02" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="description" content="5.1 Ejemplo 1 | Introducción al software R">
+
+<title>5.1 Ejemplo 1 | Introducción al software R</title>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+/* show arrow before summary tag as in bootstrap
+TODO: remove if boostrap in updated in html_document (rmarkdown#1485) */
+details > summary {
+  display: list-item;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#prefacio" id="toc-prefacio">Prefacio</a></li>
+<li class="has-sub"><a href="1-el-software.html#el-software" id="toc-el-software"><span class="toc-section-number">1</span> El software</a>
+<ul>
+<li><a href="1.1-r-y-rstudio.html#r-y-rstudio" id="toc-r-y-rstudio"><span class="toc-section-number">1.1</span> R y RStudio</a></li>
+<li><a href="1.2-rscripts.html#rscripts" id="toc-rscripts"><span class="toc-section-number">1.2</span> RScripts</a></li>
+<li><a href="1.3-librería-del-usuario.html#librería-del-usuario" id="toc-librería-del-usuario"><span class="toc-section-number">1.3</span> Librería del usuario</a></li>
+<li><a href="1.4-datasets-integrados.html#datasets-integrados" id="toc-datasets-integrados"><span class="toc-section-number">1.4</span> Datasets integrados</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-tipos-de-datos-y-objetos-en-r.html#tipos-de-datos-y-objetos-en-r" id="toc-tipos-de-datos-y-objetos-en-r"><span class="toc-section-number">2</span> Tipos de datos y objetos en R</a>
+<ul>
+<li><a href="2.1-vectores.html#vectores" id="toc-vectores"><span class="toc-section-number">2.1</span> Vectores</a></li>
+<li><a href="2.2-matrices.html#matrices" id="toc-matrices"><span class="toc-section-number">2.2</span> Matrices</a></li>
+<li><a href="2.3-dataframes.html#dataframes" id="toc-dataframes"><span class="toc-section-number">2.3</span> Dataframes</a></li>
+</ul></li>
+<li class="has-sub"><a href="3-lectura-de-archivos.html#lectura-de-archivos" id="toc-lectura-de-archivos"><span class="toc-section-number">3</span> Lectura de archivos</a>
+<ul>
+<li><a href="3.1-archivos-de-texto.html#archivos-de-texto" id="toc-archivos-de-texto"><span class="toc-section-number">3.1</span> Archivos de texto</a></li>
+<li><a href="3.2-archivos-csv.html#archivos-csv" id="toc-archivos-csv"><span class="toc-section-number">3.2</span> Archivos csv</a></li>
+<li><a href="3.3-archivos-de-excel.html#archivos-de-excel" id="toc-archivos-de-excel"><span class="toc-section-number">3.3</span> Archivos de Excel</a></li>
+</ul></li>
+<li class="has-sub"><a href="4-análisis-exploratorio-de-datos.html#análisis-exploratorio-de-datos" id="toc-análisis-exploratorio-de-datos"><span class="toc-section-number">4</span> Análisis exploratorio de datos</a>
+<ul>
+<li><a href="4.1-ejemplo-1.html#ejemplo-1" id="toc-ejemplo-1"><span class="toc-section-number">4.1</span> Ejemplo 1</a></li>
+<li><a href="4.2-ejemplo-2.html#ejemplo-2" id="toc-ejemplo-2"><span class="toc-section-number">4.2</span> Ejemplo 2</a></li>
+<li><a href="4.3-ejemplo-3.html#ejemplo-3" id="toc-ejemplo-3"><span class="toc-section-number">4.3</span> Ejemplo 3</a></li>
+<li><a href="4.4-ejemplo-4.html#ejemplo-4" id="toc-ejemplo-4"><span class="toc-section-number">4.4</span> Ejemplo 4</a></li>
+</ul></li>
+<li class="has-sub"><a href="5-análisis-descriptivo-para-variables-correlacionadas.html#análisis-descriptivo-para-variables-correlacionadas" id="toc-análisis-descriptivo-para-variables-correlacionadas"><span class="toc-section-number">5</span> Análisis descriptivo para variables correlacionadas</a>
+<ul>
+<li><a href="5.1-ejemplo-1-1.html#ejemplo-1-1" id="toc-ejemplo-1-1"><span class="toc-section-number">5.1</span> Ejemplo 1</a></li>
+<li><a href="5.2-ejemplo-2-1.html#ejemplo-2-1" id="toc-ejemplo-2-1"><span class="toc-section-number">5.2</span> Ejemplo 2</a></li>
+</ul></li>
+<li><a href="6-intervalos-de-confianza.html#intervalos-de-confianza" id="toc-intervalos-de-confianza"><span class="toc-section-number">6</span> Intervalos de confianza</a></li>
+<li><a href="7-intervalo-de-confianza-y-prueba-de-hipótesis-para-comparar-dos-medias.html#intervalo-de-confianza-y-prueba-de-hipótesis-para-comparar-dos-medias" id="toc-intervalo-de-confianza-y-prueba-de-hipótesis-para-comparar-dos-medias"><span class="toc-section-number">7</span> Intervalo de confianza y prueba de hipótesis para comparar dos medias</a></li>
+<li><a href="8-análisis-de-varianza-en-una-clasificación.html#análisis-de-varianza-en-una-clasificación" id="toc-análisis-de-varianza-en-una-clasificación"><span class="toc-section-number">8</span> Análisis de varianza en una clasificación</a></li>
+<li><a href="references.html#references" id="toc-references">References</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="ejemplo-1-1" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Ejemplo 1</h2>
+<p>Consideremos un experimento donde se registraron datos de la edad gestacional y peso al nacer de un grupo de 17 bebés.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="5.1-ejemplo-1-1.html#cb69-1" tabindex="-1"></a>edad_ges <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">34.7</span>, <span class="dv">36</span>,<span class="fl">29.3</span>, <span class="fl">40.1</span>, <span class="fl">35.7</span>, <span class="fl">42.4</span>, <span class="fl">40.3</span>, <span class="fl">37.3</span>, <span class="fl">40.9</span>, </span>
+<span id="cb69-2"><a href="5.1-ejemplo-1-1.html#cb69-2" tabindex="-1"></a>              <span class="fl">38.3</span>, <span class="fl">38.5</span>, <span class="fl">41.4</span>, <span class="fl">39.7</span>, <span class="fl">39.7</span>, <span class="fl">41.1</span>, <span class="dv">38</span>, <span class="fl">38.7</span>)</span>
+<span id="cb69-3"><a href="5.1-ejemplo-1-1.html#cb69-3" tabindex="-1"></a></span>
+<span id="cb69-4"><a href="5.1-ejemplo-1-1.html#cb69-4" tabindex="-1"></a>peso_nacer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1895</span>, <span class="dv">2030</span>, <span class="dv">1440</span>, <span class="dv">2835</span>, <span class="dv">3090</span>, <span class="dv">3827</span>, <span class="dv">3260</span>, <span class="dv">2690</span>, </span>
+<span id="cb69-5"><a href="5.1-ejemplo-1-1.html#cb69-5" tabindex="-1"></a>                <span class="dv">3885</span>, <span class="dv">2920</span>, <span class="dv">3430</span>, <span class="dv">3657</span>, <span class="dv">3685</span>, <span class="dv">3345</span>, <span class="dv">3260</span>, <span class="dv">2680</span>, <span class="dv">2005</span>)</span></code></pre></div>
+<p>Para comprender la relación entre estas dos variables, se puede calcular su <strong>correlación</strong>,</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="5.1-ejemplo-1-1.html#cb70-1" tabindex="-1"></a><span class="fu">cor</span>(edad_ges,peso_nacer)</span></code></pre></div>
+<pre><code>## [1] 0.8197466</code></pre>
+<p>y reforzar el resultado numérico obtenido, mediante un <strong>diagrama de dispersión</strong></p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="5.1-ejemplo-1-1.html#cb72-1" tabindex="-1"></a><span class="fu">plot</span>(edad_ges,peso_nacer)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<p>Podemos ajustar un modelo de <strong>regresión lineal</strong>, para establecer la relación lineal de una variable respecto a la otra,</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="5.1-ejemplo-1-1.html#cb73-1" tabindex="-1"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(peso_nacer <span class="sc">~</span> edad_ges)</span></code></pre></div>
+<p>y solicitar los detalles del modelo con la siguiente instrucción,</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="5.1-ejemplo-1-1.html#cb74-1" tabindex="-1"></a><span class="fu">summary</span>(reg1) </span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = peso_nacer ~ edad_ges)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -997.12 -198.17   -6.12  224.06  657.93 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -4351.62    1319.06  -3.299  0.00487 ** 
+## edad_ges      190.02      34.28   5.543 5.63e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 432.8 on 15 degrees of freedom
+## Multiple R-squared:  0.672,  Adjusted R-squared:  0.6501 
+## F-statistic: 30.73 on 1 and 15 DF,  p-value: 5.629e-05</code></pre>
+<p>podemos además ajustar la línea de regresión en el diagrama de dispersión,</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="5.1-ejemplo-1-1.html#cb76-1" tabindex="-1"></a><span class="fu">plot</span>(edad_ges,peso_nacer)</span>
+<span id="cb76-2"><a href="5.1-ejemplo-1-1.html#cb76-2" tabindex="-1"></a><span class="fu">abline</span>(reg1)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p>Para extraer información específica asociada al modelo, como por ejemplo sus coeficientes, podemos usar la siguiente instrucción,</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="5.1-ejemplo-1-1.html#cb77-1" tabindex="-1"></a>reg1<span class="sc">$</span>coefficients</span></code></pre></div>
+<pre><code>## (Intercept)    edad_ges 
+##  -4351.6240    190.0193</code></pre>
+<p>y analizar el comportamiento de los residuales gráficamente</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="5.1-ejemplo-1-1.html#cb79-1" tabindex="-1"></a><span class="fu">plot</span>(reg1<span class="sc">$</span>residuals)</span>
+<span id="cb79-2"><a href="5.1-ejemplo-1-1.html#cb79-2" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+</div>
+<p style="text-align: center;">
+<a href="5-análisis-descriptivo-para-variables-correlacionadas.html"><button class="btn btn-default">Previous</button></a>
+<a href="5.2-ejemplo-2-1.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

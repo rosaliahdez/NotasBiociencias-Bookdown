@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 4 Análisis exploratorio de datos | Introducción al software R</title>
+<meta name="author" content="Figueroa Preciado Gudelia, Hernández Amador Rosalía Gpe., Montoya Laos José">
+<meta name="generator" content="bookdown 0.36 with bs4_book()">
+<meta property="og:title" content="Capítulo 4 Análisis exploratorio de datos | Introducción al software R">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 4 Análisis exploratorio de datos | Introducción al software R">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+<meta name="description" content="Para comprender el comportamiento de un conjunto de datos, antes de aplicar técnicas más especializadas de la estadística, se suele realizar en primer lugar un análisis exploratprio de datos, con...">
+<meta property="og:description" content="Para comprender el comportamiento de un conjunto de datos, antes de aplicar técnicas más especializadas de la estadística, se suele realizar en primer lugar un análisis exploratprio de datos, con...">
+<meta name="twitter:description" content="Para comprender el comportamiento de un conjunto de datos, antes de aplicar técnicas más especializadas de la estadística, se suele realizar en primer lugar un análisis exploratprio de datos, con...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Introducción al software R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Prefacio</a></li>
+<li><a class="" href="el-software.html"><span class="header-section-number">1</span> El software</a></li>
+<li><a class="" href="tipos-de-datos-y-objetos-en-r.html"><span class="header-section-number">2</span> Tipos de datos y objetos en R</a></li>
+<li><a class="" href="lectura-de-archivos.html"><span class="header-section-number">3</span> Lectura de archivos</a></li>
+<li><a class="active" href="an%C3%A1lisis-exploratorio-de-datos.html"><span class="header-section-number">4</span> Análisis exploratorio de datos</a></li>
+<li><a class="" href="an%C3%A1lisis-descriptivo-para-variables-correlacionadas.html"><span class="header-section-number">5</span> Análisis descriptivo para variables correlacionadas</a></li>
+<li><a class="" href="intervalos-de-confianza.html"><span class="header-section-number">6</span> Intervalos de confianza</a></li>
+<li><a class="" href="intervalo-de-confianza-y-prueba-de-hip%C3%B3tesis-para-comparar-dos-medias.html"><span class="header-section-number">7</span> Intervalo de confianza y prueba de hipótesis para comparar dos medias</a></li>
+<li><a class="" href="an%C3%A1lisis-de-varianza-en-una-clasificaci%C3%B3n.html"><span class="header-section-number">8</span> Análisis de varianza en una clasificación</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="análisis-exploratorio-de-datos" class="section level1" number="4">
+<h1>
+<span class="header-section-number">Capítulo 4</span> Análisis exploratorio de datos<a class="anchor" aria-label="anchor" href="#an%C3%A1lisis-exploratorio-de-datos"><i class="fas fa-link"></i></a>
+</h1>
+<p>Para comprender el comportamiento de un conjunto de datos, antes de aplicar técnicas más especializadas de la estadística, se suele realizar en primer lugar un análisis exploratprio de datos, con el objetivo de visualizar y comprender la distribución de los datos.</p>
+<div id="ejemplo-1" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Ejemplo 1<a class="anchor" aria-label="anchor" href="#ejemplo-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Supongamos que registramos la cantidad de respuestas correctas logradas en un exámen, aplicado a un grupo de 15 estudiantes:</p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">respuestas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">3</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
+<p>podemos crear una <strong>tabla de frecuencias absolutas</strong> con la siguiente instrucción:</p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">respuestas</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## respuestas
+## 2 3 4 5 6 7 8 
+## 1 3 4 4 1 1 1</code></pre>
+<p>y elaborar una gráfica sencilla, pero de gran utilidad como lo es un <strong>diagrama de barras</strong></p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">respuestas</span><span class="op">)</span>, </span>
+<span>        main <span class="op">=</span> <span class="st">"Número de respuestas correctas"</span>, </span>
+<span>        col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-20-1.png" width="672"></div>
+<p>Además, podemos calcular fácilmente algunas medidas descriptivas. Por ejemplo, podemos examinar el valor mínimo y máximo ordenando las observaciones como sigue:</p>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">respuestas</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##  [1] 2 3 3 3 4 4 4 4 5 5 5 5 6 7 8</code></pre>
+<p>calcular la <strong>media</strong>,</p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">respuestas</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 4.533333</code></pre>
+<p>la <strong>mediana</strong>,</p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">respuestas</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<p>la <strong>varianza</strong>,</p>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">respuestas</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 2.552381</code></pre>
+<p>la <strong>desviación estándar</strong>,</p>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">respuestas</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1.597617</code></pre>
+<p>los <strong>cuartiles</strong>,</p>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">respuestas</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   0%  25%  50%  75% 100% 
+##  2.0  3.5  4.0  5.0  8.0</code></pre>
+<p>especificar otros cuantiles deseados</p>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">respuestas</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span>,<span class="fl">0.5</span>,<span class="fl">0.9</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 10% 50% 90% 
+## 3.0 4.0 6.6</code></pre>
+<p>o podemos solicitar un resumen de las estadísticas descriptivas anteriores con la función <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>,</p>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">respuestas</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   2.000   3.500   4.000   4.533   5.000   8.000</code></pre>
+</div>
+<div id="ejemplo-2" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Ejemplo 2<a class="anchor" aria-label="anchor" href="#ejemplo-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>Consideremos ahora otro conjunto de datos,</p>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">datos2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2.4</span>, <span class="fl">2.6</span>, <span class="fl">1.3</span>, <span class="fl">2.7</span>, <span class="fl">3.1</span>, <span class="fl">3.4</span>, <span class="fl">3.6</span>, <span class="fl">2.5</span>, <span class="fl">3.7</span>, </span>
+<span>            <span class="fl">3.9</span>, <span class="fl">4.2</span>, <span class="fl">4.1</span>, <span class="fl">4.5</span>, <span class="fl">5.2</span>, <span class="fl">3.3</span>, <span class="fl">1.6</span>, <span class="fl">3.7</span>,<span class="fl">7.6</span><span class="op">)</span></span></code></pre></div>
+<p>Otra herramienta visual de la estadística descriptiva que podemos realizar en un conjunto de datos para analizar su distribución, es la construcción de un <strong>diagrma de tallo y hojas</strong>. Para elaborarlo, primero ordenamos los datos,</p>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">datos2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##  [1] 1.3 1.6 2.4 2.5 2.6 2.7 3.1 3.3 3.4 3.6 3.7 3.7 3.9 4.1 4.2 4.5 5.2 7.6</code></pre>
+<p>y graficamos el diagrama con los datos ordenados</p>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/stem.html">stem</a></span><span class="op">(</span><span class="va">datos2</span>, scale<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##   The decimal point is at the |
+## 
+##   1 | 36
+##   2 | 4567
+##   3 | 1346779
+##   4 | 125
+##   5 | 2
+##   6 | 
+##   7 | 6</code></pre>
+<p>o podemos elaborar también <strong>un diagrama de caja</strong>,</p>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">datos2</span>, horizontal <span class="op">=</span> <span class="cn">T</span>, border <span class="op">=</span> <span class="st">"blue"</span>, </span>
+<span>        xlab <span class="op">=</span> <span class="st">"Tiempos"</span>, main <span class="op">=</span> <span class="st">"Diagrama de caja"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-32-1.png" width="672"></div>
+</div>
+<div id="ejemplo-3" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Ejemplo 3<a class="anchor" aria-label="anchor" href="#ejemplo-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>Simulemos ahora una muestra aleatoria de 100 observaciones provenientes de una distribución normal, con media <span class="math inline">\(\mu = 20\)</span> y desviación estándar <span class="math inline">\(\sigma = 3\)</span>,</p>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">datos3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">20</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<p>Podemos analizar su distribución por medio de un histograma,</p>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">datos3</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-34-1.png" width="672"></div>
+<p>y personalizar la gráfica añadiendo una curva normal,</p>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">datos3</span>, freq <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">ejenorm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">30</span>, <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">ejenorm</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">dnorm</a></span><span class="op">(</span><span class="va">ejenorm</span>, <span class="fl">20</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-35-1.png" width="672"></div>
+</div>
+<div id="ejemplo-4" class="section level2" number="4.4">
+<h2>
+<span class="header-section-number">4.4</span> Ejemplo 4<a class="anchor" aria-label="anchor" href="#ejemplo-4"><i class="fas fa-link"></i></a>
+</h2>
+<p>Comparemos ahora varios conjuntos de datos. Para esto, generemos dos muestras de una distribución normal, y una tercer muestra de una distribución chi cuadarada,</p>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">10</span>, <span class="fl">1.5</span><span class="op">)</span></span>
+<span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">15</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">x3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Chisquare.html">rchisq</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
+<p>Comparemos los datos de las primeras dos muestras mediante diagramas de cajas</p>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">x1</span>,<span class="va">x2</span>, horizontal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-37-1.png" width="672"></div>
+<p>Podemos efectuar un <strong>gráfico cuantil-cuantil (o gráfico Q-Q)</strong>, para comparar si las dos muestras <code>x1</code> y <code>x2</code> provienen de la misma distribución</p>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqplot</a></span><span class="op">(</span><span class="va">x1</span>, <span class="va">x2</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">18</span><span class="op">)</span>, ylim<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">18</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-38-1.png" width="672"></div>
+<p>O podemos reemplazar una de las muestras en la comparación anterior, por los cuantiles de una distribución normal, para determinar si cada una de la muestras sigue una distribución normal. Por ejemplo, para la muestra <code>x1</code> obtenemos el siguiente gráfico,</p>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">x1</span>, main<span class="op">=</span><span class="st">"qqplot de x1"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">x1</span>,col<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-39-1.png" width="672"></div>
+<p>y para la muestra <code>x3</code> el siguiente,</p>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">x3</span>,main<span class="op">=</span><span class="st">"qqplot de x3"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">x3</span>,col<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-40-1.png" width="672"></div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="lectura-de-archivos.html"><span class="header-section-number">3</span> Lectura de archivos</a></div>
+<div class="next"><a href="an%C3%A1lisis-descriptivo-para-variables-correlacionadas.html"><span class="header-section-number">5</span> Análisis descriptivo para variables correlacionadas</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#an%C3%A1lisis-exploratorio-de-datos"><span class="header-section-number">4</span> Análisis exploratorio de datos</a></li>
+<li><a class="nav-link" href="#ejemplo-1"><span class="header-section-number">4.1</span> Ejemplo 1</a></li>
+<li><a class="nav-link" href="#ejemplo-2"><span class="header-section-number">4.2</span> Ejemplo 2</a></li>
+<li><a class="nav-link" href="#ejemplo-3"><span class="header-section-number">4.3</span> Ejemplo 3</a></li>
+<li><a class="nav-link" href="#ejemplo-4"><span class="header-section-number">4.4</span> Ejemplo 4</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Introducción al software R</strong>" was written by Figueroa Preciado Gudelia,
+Hernández Amador Rosalía Gpe., Montoya Laos José. It was last built on 2023-11-03.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

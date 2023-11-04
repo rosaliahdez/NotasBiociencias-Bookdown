@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 5 Análisis descriptivo para variables correlacionadas | Introducción al software R</title>
+<meta name="author" content="Figueroa Preciado Gudelia, Hernández Amador Rosalía Gpe., Montoya Laos José">
+<meta name="generator" content="bookdown 0.36 with bs4_book()">
+<meta property="og:title" content="Capítulo 5 Análisis descriptivo para variables correlacionadas | Introducción al software R">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 5 Análisis descriptivo para variables correlacionadas | Introducción al software R">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+<meta name="description" content="Para comprender la relación entre dos variables y tomar decisiones sobre posibles análisis posteriores, un estudio común en estadística suele consistir en investigar si dos variables se encuentran...">
+<meta property="og:description" content="Para comprender la relación entre dos variables y tomar decisiones sobre posibles análisis posteriores, un estudio común en estadística suele consistir en investigar si dos variables se encuentran...">
+<meta name="twitter:description" content="Para comprender la relación entre dos variables y tomar decisiones sobre posibles análisis posteriores, un estudio común en estadística suele consistir en investigar si dos variables se encuentran...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Introducción al software R</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Prefacio</a></li>
+<li><a class="" href="el-software.html"><span class="header-section-number">1</span> El software</a></li>
+<li><a class="" href="tipos-de-datos-y-objetos-en-r.html"><span class="header-section-number">2</span> Tipos de datos y objetos en R</a></li>
+<li><a class="" href="lectura-de-archivos.html"><span class="header-section-number">3</span> Lectura de archivos</a></li>
+<li><a class="" href="an%C3%A1lisis-exploratorio-de-datos.html"><span class="header-section-number">4</span> Análisis exploratorio de datos</a></li>
+<li><a class="active" href="an%C3%A1lisis-descriptivo-para-variables-correlacionadas.html"><span class="header-section-number">5</span> Análisis descriptivo para variables correlacionadas</a></li>
+<li><a class="" href="intervalos-de-confianza.html"><span class="header-section-number">6</span> Intervalos de confianza</a></li>
+<li><a class="" href="intervalo-de-confianza-y-prueba-de-hip%C3%B3tesis-para-comparar-dos-medias.html"><span class="header-section-number">7</span> Intervalo de confianza y prueba de hipótesis para comparar dos medias</a></li>
+<li><a class="" href="an%C3%A1lisis-de-varianza-en-una-clasificaci%C3%B3n.html"><span class="header-section-number">8</span> Análisis de varianza en una clasificación</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="análisis-descriptivo-para-variables-correlacionadas" class="section level1" number="5">
+<h1>
+<span class="header-section-number">Capítulo 5</span> Análisis descriptivo para variables correlacionadas<a class="anchor" aria-label="anchor" href="#an%C3%A1lisis-descriptivo-para-variables-correlacionadas"><i class="fas fa-link"></i></a>
+</h1>
+<p>Para comprender la relación entre dos variables y tomar decisiones sobre posibles análisis posteriores, un estudio común en estadística suele consistir en investigar si dos variables se encuentran correlacionadas. Usualmente se calcula un valor numérico de dicha correlación y se complementa el estudio con un análisis gráfico.</p>
+<div id="ejemplo-1-1" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Ejemplo 1<a class="anchor" aria-label="anchor" href="#ejemplo-1-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Consideremos un experimento donde se registraron datos de la edad gestacional y peso al nacer de un grupo de 17 bebés.</p>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">edad_ges</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">34.7</span>, <span class="fl">36</span>,<span class="fl">29.3</span>, <span class="fl">40.1</span>, <span class="fl">35.7</span>, <span class="fl">42.4</span>, <span class="fl">40.3</span>, <span class="fl">37.3</span>, <span class="fl">40.9</span>, </span>
+<span>              <span class="fl">38.3</span>, <span class="fl">38.5</span>, <span class="fl">41.4</span>, <span class="fl">39.7</span>, <span class="fl">39.7</span>, <span class="fl">41.1</span>, <span class="fl">38</span>, <span class="fl">38.7</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">peso_nacer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1895</span>, <span class="fl">2030</span>, <span class="fl">1440</span>, <span class="fl">2835</span>, <span class="fl">3090</span>, <span class="fl">3827</span>, <span class="fl">3260</span>, <span class="fl">2690</span>, </span>
+<span>                <span class="fl">3885</span>, <span class="fl">2920</span>, <span class="fl">3430</span>, <span class="fl">3657</span>, <span class="fl">3685</span>, <span class="fl">3345</span>, <span class="fl">3260</span>, <span class="fl">2680</span>, <span class="fl">2005</span><span class="op">)</span></span></code></pre></div>
+<p>Para comprender la relación entre estas dos variables, se puede calcular su <strong>correlación</strong>,</p>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">edad_ges</span>,<span class="va">peso_nacer</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.8197466</code></pre>
+<p>y reforzar el resultado numérico obtenido, mediante un <strong>diagrama de dispersión</strong></p>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">edad_ges</span>,<span class="va">peso_nacer</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-43-1.png" width="672"></div>
+<p>Podemos ajustar un modelo de <strong>regresión lineal</strong>, para establecer la relación lineal de una variable respecto a la otra,</p>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">reg1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">peso_nacer</span> <span class="op">~</span> <span class="va">edad_ges</span><span class="op">)</span></span></code></pre></div>
+<p>y solicitar los detalles del modelo con la siguiente instrucción,</p>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">reg1</span><span class="op">)</span> </span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = peso_nacer ~ edad_ges)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -997.12 -198.17   -6.12  224.06  657.93 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -4351.62    1319.06  -3.299  0.00487 ** 
+## edad_ges      190.02      34.28   5.543 5.63e-05 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 432.8 on 15 degrees of freedom
+## Multiple R-squared:  0.672,  Adjusted R-squared:  0.6501 
+## F-statistic: 30.73 on 1 and 15 DF,  p-value: 5.629e-05</code></pre>
+<p>podemos además ajustar la línea de regresión en el diagrama de dispersión,</p>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">edad_ges</span>,<span class="va">peso_nacer</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">reg1</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-46-1.png" width="672"></div>
+<p>Para extraer información específica asociada al modelo, como por ejemplo sus coeficientes, podemos usar la siguiente instrucción,</p>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">reg1</span><span class="op">$</span><span class="va">coefficients</span></span></code></pre></div>
+<pre><code>## (Intercept)    edad_ges 
+##  -4351.6240    190.0193</code></pre>
+<p>y analizar el comportamiento de los residuales gráficamente</p>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">reg1</span><span class="op">$</span><span class="va">residuals</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-48-1.png" width="672"></div>
+</div>
+<div id="ejemplo-2-1" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Ejemplo 2<a class="anchor" aria-label="anchor" href="#ejemplo-2-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>A manera de ilustración del uso de datasets integrados en R, y para destacar la importancia de analizar un conjunto de datos desde diferentes perspectivas, a continuación se analiza el dataset <code>Anscombre</code>, el cual fué creado por el estadístico Francis Ascombre y publicado en 1973 en The American Statistician.</p>
+<p>En primer lugar cargamos el conjunto de datos Anscombe,</p>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">anscombe</span><span class="op">)</span></span></code></pre></div>
+<p>y podemos mostrar el contenido del dataset</p>
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">anscombe</span></span></code></pre></div>
+<pre><code>##    x1 x2 x3 x4    y1   y2    y3    y4
+## 1  10 10 10  8  8.04 9.14  7.46  6.58
+## 2   8  8  8  8  6.95 8.14  6.77  5.76
+## 3  13 13 13  8  7.58 8.74 12.74  7.71
+## 4   9  9  9  8  8.81 8.77  7.11  8.84
+## 5  11 11 11  8  8.33 9.26  7.81  8.47
+## 6  14 14 14  8  9.96 8.10  8.84  7.04
+## 7   6  6  6  8  7.24 6.13  6.08  5.25
+## 8   4  4  4 19  4.26 3.10  5.39 12.50
+## 9  12 12 12  8 10.84 9.13  8.15  5.56
+## 10  7  7  7  8  4.82 7.26  6.42  7.91
+## 11  5  5  5  8  5.68 4.74  5.73  6.89</code></pre>
+<p>Como podemos observar, este dataset consta de cuatro subconjuntos de datos, con 11 pares de observaciones cada uno del tipo <span class="math inline">\((x_i,y_i), i = 1, ..., 4\)</span>.</p>
+<p>Para poder utilizar en el análisis siguiente los nombres de las variables tal y como aparecen en la tabla, utilizamos la instrucción <code><a href="https://rdrr.io/r/base/attach.html">attach()</a></code>,</p>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/attach.html">attach</a></span><span class="op">(</span><span class="va">anscombe</span><span class="op">)</span></span></code></pre></div>
+<p>Como podemos ver con los siguientes cálculos, estos cuatro subconjuntos tienen propiedades estadísticas muy similares, pues si ajustamos un modelo de regresión a cada subconjunto, obtenemos lo siguiente:</p>
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">regresion1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y1</span> <span class="op">~</span> <span class="va">x1</span><span class="op">)</span></span>
+<span><span class="va">regresion1</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y1 ~ x1)
+## 
+## Coefficients:
+## (Intercept)           x1  
+##      3.0001       0.5001</code></pre>
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">regresion2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y2</span> <span class="op">~</span> <span class="va">x2</span><span class="op">)</span></span>
+<span><span class="va">regresion2</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y2 ~ x2)
+## 
+## Coefficients:
+## (Intercept)           x2  
+##       3.001        0.500</code></pre>
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">regresion3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y3</span><span class="op">~</span> <span class="va">x3</span><span class="op">)</span></span>
+<span><span class="va">regresion3</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y3 ~ x3)
+## 
+## Coefficients:
+## (Intercept)           x3  
+##      3.0025       0.4997</code></pre>
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">regresion4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y4</span><span class="op">~</span><span class="va">x4</span><span class="op">)</span></span>
+<span><span class="va">regresion4</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y4 ~ x4)
+## 
+## Coefficients:
+## (Intercept)           x4  
+##      3.0017       0.4999</code></pre>
+<p>sin embargo, al momento de representar gráficamente el comportamiento de los cuatro conjuntos de datos mediante diagramas de dispersión, podemos comprobar que difieren significativamente</p>
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x1</span>,<span class="va">y1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x2</span>,<span class="va">y2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x3</span>,<span class="va">y3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x4</span>,<span class="va">y4</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="_main_files/figure-html/unnamed-chunk-56-1.png" width="672"></div>
+<p>Este conjunto de datos, precargado en R, es un ejemplo claro de la importancia de la visualización de datos en el análisis estadístico.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="an%C3%A1lisis-exploratorio-de-datos.html"><span class="header-section-number">4</span> Análisis exploratorio de datos</a></div>
+<div class="next"><a href="intervalos-de-confianza.html"><span class="header-section-number">6</span> Intervalos de confianza</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#an%C3%A1lisis-descriptivo-para-variables-correlacionadas"><span class="header-section-number">5</span> Análisis descriptivo para variables correlacionadas</a></li>
+<li><a class="nav-link" href="#ejemplo-1-1"><span class="header-section-number">5.1</span> Ejemplo 1</a></li>
+<li><a class="nav-link" href="#ejemplo-2-1"><span class="header-section-number">5.2</span> Ejemplo 2</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Introducción al software R</strong>" was written by Figueroa Preciado Gudelia,
+Hernández Amador Rosalía Gpe., Montoya Laos José. It was last built on 2023-11-03.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

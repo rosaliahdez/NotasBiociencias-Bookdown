@@ -1,0 +1,56 @@
+# Intervalo de confianza y prueba de hipótesis para comparar dos medias
+
+La comparación de dos medias es un procedimiento común en estadística que se utiliza cuando se desea determinar si existen diferencias significativas entre las medias de dos grupos o poblaciones. El siguiente ejercicio muestra dos enfoques  para la comparación de medias, mediante intervalos de confianza y mediante pruebas de hipótesis.
+
+Para este tipo de procedimientos, debemos verificar primeramente que se cumplen los supuestos de normalidad en las muestras que se asumen independientes, y debemos verificar que no sea rechazado el supuesto de homogeneidad de varianzas.
+
+Consideremos dos muestras independientes de datos:
+
+```{r}
+rm(list=ls())
+metodoA <- c(23.2,26.6,24.4, 23.5, 22.6, 25.7, 25.5, 22.3, 
+             22.5, 23.1, 24.6, 25.2, 23.7)
+
+metodoB <- c(25.7, 27.7, 26.2, 27.9, 25.0, 27.9, 26.1, 25.3, 
+             26.2, 27.4, 27.1, 25.8, 26.4, 27.2)
+```
+
+Para determinar normalidad en los conjuntos de datos, podemos aplicar la prueba de Shapiro-Wilk en cada una de éstas,
+
+```{r}
+shapiro.test(metodoA)
+```
+
+```{r}
+shapiro.test(metodoB)
+```
+
+Para efectuar una **prueba de hipótesis** para comparar las varianzas $\sigma_1^2$ y $\sigma_2^2$, la hipótesis nula puede considerarse como $H_0:\sigma_1^2 = \sigma_2^2$ o equivalentemente $H_0:\sigma_1^2 / \sigma_2^2 =1$, y la hipótesis alternativa será $H_1:\sigma_1^2/\sigma_2^2 \neq 1$.
+
+```{r}
+var.test(metodoB,metodoA,alternative= "two.sided")
+```
+
+Podemos notar que no importa el orden en que se ingresa cada uno de los métodos en la prueba de homogeneidad de varianzas.
+
+```{r}
+var.test(metodoA,metodoB,alternative="two.sided")
+```
+
+El $p$-valor resultante de 0.2212 indica que no hay evidencia en la muestra para rechazar la hipótesis nula. 
+
+Por lo tanto, satisfechos los supuestos de normalidad y homogeneidad de varianzas, podemos solicitar el intervalo de confianza y la prueba de hipótesis para comparar las medias poblacionales utilizando el comando `t.test()` de R. 
+
+En este caso las hipótesis que se plantean son: 
+$$\begin{matrix}
+H_0:\mu_1=\mu_2\\
+H_1:\mu_1\neq \mu_2
+\end{matrix} $$
+
+```{r}
+t.test(metodoA, metodoB, alternative = "two.sided", var.equal=TRUE)
+```
+
+En este caso la muestra da evidencia para rechazar la hipótesis nula, al nivel de significancia del 5%, conclusión que también se obtiene con el intervalo de confianza construido, pues recordemos que si el intervalo de confianza no incluye el cero, se puede concluir que hay una diferencia significativa entre las medias.
+
+

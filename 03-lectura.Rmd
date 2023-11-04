@@ -1,0 +1,51 @@
+# Lectura de archivos
+
+En R podemos importar una gran variedad de tipos de archivos, utilizando funciones propias del sistema base o funciones de otros paquetes. 
+
+Para leer bases de datos desde un archivo en nuestra computadora, debemos cuidar que éste se encuentre almacenado en el directorio de trabajo.
+
+A continuación se describé cómo importar datos desde formatos de archivos más comunmente utilizados.
+
+## Archivos de texto
+
+Para leer archivos en formato **TXT (texto plano)** podemos usar la función `read.delim()`:
+
+```{r}
+Datostxt <- read.delim("analgesics.txt")
+head(Datostxt)
+```
+
+## Archivos csv
+
+Para leer archivos en formato **CSV (valores separados por comas)** podemos utilizar la función `read.csv`,
+
+```{r}
+Datoscsv <- read.csv("calificaciones.csv", header = T)
+head(Datoscsv)
+```
+
+## Archivos de Excel
+
+Para importar datos desde archivos de Excel, en formato **XLSX (valores separados por tabulaciones)** podemos utilizar la función `read_xlsx` del paquete `readxl`, que debemos agregar a la librería de usuario. 
+
+Para ésto descargamos primero el paquete, utilizando la función `install.packages()`, y a continuación lo cargamos a la sesión, para poder utilizar las funciones que contiene, utilizando el comando `library()`:
+
+```{r}
+# Instalación del paquete readxl
+# install.packages("readxl")
+
+# Carga del paquete en la sesión de trabajo
+library(readxl)
+```
+
+
+y posteriormente, leemos los datos,
+
+```{r}
+DatosXlsx <- read_xlsx("Resultados.xlsx")
+head(DatosXlsx)
+```
+
+Para cada tipo de archivo, es posible encontrar funciones o paquetes específicos que facilitan su importación y el procesamiento de datos.
+
+
