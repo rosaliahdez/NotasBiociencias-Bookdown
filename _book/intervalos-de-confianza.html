@@ -6,11 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Capítulo 6 Intervalos de confianza | Introducción al software R</title>
 <meta name="author" content="Figueroa Preciado Gudelia, Hernández Amador Rosalía Gpe., Montoya Laos José">
+<meta name="description" content="Un intervalo de confianza es un rango de valores que se utiliza en estadística para estimar un parámetro desconocido de una población en base a una muestra de datos. Comunmente el parámetro...">
 <meta name="generator" content="bookdown 0.36 with bs4_book()">
 <meta property="og:title" content="Capítulo 6 Intervalos de confianza | Introducción al software R">
 <meta property="og:type" content="book">
+<meta property="og:image" content="/portada.png">
+<meta property="og:description" content="Un intervalo de confianza es un rango de valores que se utiliza en estadística para estimar un parámetro desconocido de una población en base a una muestra de datos. Comunmente el parámetro...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Capítulo 6 Intervalos de confianza | Introducción al software R">
+<meta name="twitter:description" content="Un intervalo de confianza es un rango de valores que se utiliza en estadística para estimar un parámetro desconocido de una población en base a una muestra de datos. Comunmente el parámetro...">
+<meta name="twitter:image" content="/portada.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -19,9 +24,6 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="style.css">
-<meta name="description" content="Un intervalo de confianza es un rango de valores que se utiliza en estadística para estimar un parámetro desconocido de una población en base a una muestra de datos. Comunmente el parámetro...">
-<meta property="og:description" content="Un intervalo de confianza es un rango de valores que se utiliza en estadística para estimar un parámetro desconocido de una población en base a una muestra de datos. Comunmente el parámetro...">
-<meta name="twitter:description" content="Un intervalo de confianza es un rango de valores que se utiliza en estadística para estimar un parámetro desconocido de una población en base a una muestra de datos. Comunmente el parámetro...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -52,7 +54,6 @@
 <li><a class="active" href="intervalos-de-confianza.html"><span class="header-section-number">6</span> Intervalos de confianza</a></li>
 <li><a class="" href="intervalo-de-confianza-y-prueba-de-hip%C3%B3tesis-para-comparar-dos-medias.html"><span class="header-section-number">7</span> Intervalo de confianza y prueba de hipótesis para comparar dos medias</a></li>
 <li><a class="" href="an%C3%A1lisis-de-varianza-en-una-clasificaci%C3%B3n.html"><span class="header-section-number">8</span> Análisis de varianza en una clasificación</a></li>
-<li><a class="" href="references.html">References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -106,31 +107,31 @@
 <code class="sourceCode R"><span><span class="va">resultgral</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">pvalor</span>, <span class="va">resultado1</span>,<span class="va">resultado2</span><span class="op">)</span></span>
 <span><span class="va">resultgral</span></span></code></pre></div>
 <pre><code>##           pvalor resultado1 resultado2
-##  [1,] 0.32137049   9.457029   11.57172
-##  [2,] 0.16064797   8.465475   10.27344
-##  [3,] 0.66785324   9.455927   10.83027
-##  [4,] 0.54623494   8.912790   10.59376
-##  [5,] 0.76267493   9.059613   10.70026
-##  [6,] 0.12388255   9.788315   11.62292
-##  [7,] 0.13023279   9.820250   11.29167
-##  [8,] 0.79445511   8.914736   11.39886
-##  [9,] 0.79635058   8.836718   10.90469
-## [10,] 0.79080930   8.882865   10.86266
-## [11,] 0.19679760   8.798327   10.26458
-## [12,] 0.72383557   9.072453   11.31112
-## [13,] 0.71161175   9.036416   11.38461
-## [14,] 0.16298407   9.692275   11.69988
-## [15,] 0.31974506   8.579215   10.48867
-## [16,] 0.51747460   9.408297   11.13616
-## [17,] 0.16890112   8.839558   10.21832
-## [18,] 0.49645512   8.562703   10.72196
-## [19,] 0.82439964   9.232940   10.95182
-## [20,] 0.71885359   8.978894   10.71757
-## [21,] 0.35940390   8.594055   10.53498
-## [22,] 0.03500071   7.985947    9.91808
-## [23,] 0.76670599   9.397803   10.80447
-## [24,] 0.06068103   9.961036   11.61156
-## [25,] 0.87076126   8.798731   11.02580</code></pre>
+##  [1,] 0.13913537   8.420068  10.238610
+##  [2,] 0.33643119   9.563416  11.214584
+##  [3,] 0.39773871   8.552262  10.600912
+##  [4,] 0.94803660   9.153738  10.901405
+##  [5,] 0.14145178   8.500865  10.230938
+##  [6,] 0.41278647   9.548743  11.053141
+##  [7,] 0.62767587   9.329918  11.082992
+##  [8,] 0.05970467   9.968741  11.415135
+##  [9,] 0.41127483   9.337482  11.551051
+## [10,] 0.64547703   8.768019  10.782131
+## [11,] 0.97845381   9.219716  10.760143
+## [12,] 0.01891634   8.119124   9.809152
+## [13,] 0.78848433   9.090197  10.700467
+## [14,] 0.50521230   9.009777  10.505019
+## [15,] 0.82406225   8.917361  10.872114
+## [16,] 0.40012805   8.696731  10.543730
+## [17,] 0.18982763   8.689145  10.278389
+## [18,] 0.65881555   9.393072  10.938041
+## [19,] 0.89277233   9.139332  10.980867
+## [20,] 0.15061169   9.814616  11.118403
+## [21,] 0.83176861   9.314050  10.843314
+## [22,] 0.38706812   9.262526  11.818633
+## [23,] 0.12788644   9.808822  11.406101
+## [24,] 0.41223643   8.613904  10.593245
+## [25,] 0.55566405   9.477987  10.941472</code></pre>
 <p>Si contamos la cantidad de veces que los intervalos capturaron el valor real <span class="math inline">\(\mu=10\)</span>,</p>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cont</span><span class="op">=</span><span class="fl">0</span></span>
@@ -170,7 +171,7 @@
 
   <div class="col-12 col-md-6 mt-3">
     <p>"<strong>Introducción al software R</strong>" was written by Figueroa Preciado Gudelia,
-Hernández Amador Rosalía Gpe., Montoya Laos José. It was last built on 2023-11-04.</p>
+Hernández Amador Rosalía Gpe., Montoya Laos José. It was last built on 2023-12-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

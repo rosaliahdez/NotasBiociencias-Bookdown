@@ -6,7 +6,7 @@ Estas notas ofrecen una introducción práctica al uso del software estadístico
 
 El software **R** es tanto un entorno de programación, como un lenguaje de programación, diseñado para hacer análisis estadístico. Es de código abierto, gratuito y multiplataforma, características que lo han convertido en una herramienta ampliamente utilizada en el campo de la estadística y el análisis de datos.
 
-Por otro lado, **RStudio** es un entorno de desarrollo integrado (IDE) para trabajar con el lenguaje de programación R. Es una plataforma amigable para el usuario, y entre otras propiedades, facilita la escritura de código, visualización, generación de informes  reproducibles y la exportación de resultados en diversos formatos.
+Por otro lado, **RStudio** es un entorno de desarrollo integrado (IDE) para trabajar con el lenguaje de programación R. Es una plataforma amigable para el usuario, y entre otras propiedades, facilita la escritura de código, visualización, generación de informes reproducibles y la exportación de resultados en diversos formatos.
 
 El entorno RStudio, puede utilizarse de manera gratuita ingresando a través de una cuenta en Posit <https://posit.co/> o mediante la instalación previa de R y RStudio en gran variedad de sistemas operativos.
 
@@ -14,7 +14,7 @@ Para instalar R, podemos ingresar a la página <https://www.r-project.org> y des
 
 A continuación, para instalar RStudio, ingresamos a la página <https://www.posit.co> y descargamos e instalamos la interfaz gráfica RStudio.
 
-![](RyRStudio.png) 
+![](RyRStudio.png){width="500"}
 
 ## RScripts
 
@@ -28,7 +28,7 @@ Los Rscripts permiten la reproducibilidad de los análisis resultantes, pues al 
 
 Al instalar el software R, se instala automáticamente una colección de **paquetes del sistema base**, que se almacenan en una librería. Estos paquetes se componen de funciones básicas del sistema que nos permiten realizar tareas comunes para la manipulación y el análisis de datos.
 
-Adicionalmente, podemos instalar paquetes que nos permiten extender la funcionalidad del sistema base de R. Por ejemplo, podemos ampliar la capacidad de R para la generación de gráficos más atractivos, o para el análisis de datos en áreas especializadas como el estudio de series temporales, o para realizar análisis espaciales con el manejo de datos geoespaciales. 
+Adicionalmente, podemos instalar paquetes que nos permiten extender la funcionalidad del sistema base de R. Por ejemplo, podemos ampliar la capacidad de R para la generación de gráficos más atractivos, o para el análisis de datos en áreas especializadas como el estudio de series temporales, o para realizar análisis espaciales con el manejo de datos geoespaciales.
 
 En el repositorio centralizado CRAN (Comprehensive R Archive Network) se albergan miles de paquetes creados por la comunidad de usuarios de R, disponibles para su descarga.
 
@@ -41,4 +41,3 @@ Existen algunos conjuntos de datos que se incluyen como parte de la instalación
 Los datasets integrados en el sistema base de R son útiles para realizar ejemplos y pruebas, así como para aprender y practicar análisis de datos en R.
 
 En estas notas se muestra el uso de algunas técnicas estadísticas aplicadas en datasets cargados en el sistema base de R.
-
